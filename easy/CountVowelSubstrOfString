@@ -1,0 +1,61 @@
+/*
+Leetcode Link: https://leetcode.com/problems/count-vowel-substrings-of-a-string/description/
+Problem Description: 2062. Count Vowel Substrings of a String
+
+A substring is a contiguous (non-empty) sequence of characters within a string.
+
+A vowel substring is a substring that only consists of vowels ('a', 'e', 'i', 'o', and 'u') and has all five vowels present in it.
+
+Given a string word, return the number of vowel substrings in word.
+
+
+
+Example 1:
+
+Input: word = "aeiouu"
+Output: 2
+Explanation: The vowel substrings of word are as follows (underlined):
+- "aeiouu"
+- "aeiouu"
+Example 2:
+
+Input: word = "unicornarihan"
+Output: 0
+Explanation: Not all 5 vowels are present, so there are no vowel substrings.
+Example 3:
+
+Input: word = "cuaieuouac"
+Output: 7
+Explanation: The vowel substrings of word are as follows (underlined):
+- "cuaieuouac"
+- "cuaieuouac"
+- "cuaieuouac"
+- "cuaieuouac"
+- "cuaieuouac"
+- "cuaieuouac"
+- "cuaieuouac"
+
+*/
+
+class Solution {
+    public int countVowelSubstrings(String word) {
+        int ans = 0;
+        String vowels = "aeiou";
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0, j = -1; i < word.length(); i++){ // j is the letter behind the current start of the window
+            int found = vowels.indexOf(word.charAt(i));
+            if (found == -1){ // Reset everything because it can't end with i
+                map.clear();
+                j = i;
+            }else{
+                map.put(found, i); // we only care about the latest index for any given vowel
+            }
+            if (map.size() == 5){ // we have the min idx of the vowels - j valid subarrays.
+                ans += 1;
+            }
+        }
+
+        return ans;
+    }
+}
