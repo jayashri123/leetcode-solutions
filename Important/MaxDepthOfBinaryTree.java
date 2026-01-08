@@ -18,3 +18,19 @@ class MaxDepthOfBinaryTree {
         
     }
 }
+
+/*
+“The depth of a binary tree is 1 plus the maximum depth of its subtrees, so a recursive DFS naturally fits.”
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        return 1 + Math.max(left, right);
+    }
+}
+
+*/
